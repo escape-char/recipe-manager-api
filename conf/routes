@@ -1,0 +1,31 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# An example controller showing a sample home page
+GET     /                           controllers.ApplicationController.index
+
+#user routes
+GET     /api/users   controllers.UsersController.fetch(offset: Option[Int],limit:Option[Int],username: Option[String],email: Option[String],id: Option[Long])
+GET     /api/is_username_taken  controllers.UsersController.isUsernameTaken(username:String)
+GET     /api/is_email_taken  controllers.UsersController.isEmailTaken(email:String)
+
+#category routes
+GET /api/my/categories     controllers.CategoriesController.fetchMine(offset: Option[Int], limit:Option[Int], searchName:Option[String], name:Option[String], categoryId: Option[Long])
+POST /api/my/categories     controllers.CategoriesController.create
+PUT /api/my/categories/:id   controllers.CategoriesController.updateMine(id:Long)
+DELETE /api/my/categories/:id   controllers.CategoriesController.deleteMine(id:Long)
+
+
+#recipe routes
+GET /api/my/recipes         controllers.RecipesController.fetchMine(offset:Option[Int],limit:Option[Int], searchTerm:Option[String],title:Option[String], recipeId:Option[Long], categoryId:Option[Long])
+POST /api/my/recipes         controllers.RecipesController.create
+
+POST     /api/register   controllers.RegisterController.register
+
+POST /api/auth           controllers.AuthController.auth
+POST /api/signout       controllers.AuthController.signout
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
